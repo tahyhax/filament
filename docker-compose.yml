@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fillament-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - fillament
+
+  nginx:
+    image: nginx:alpine
+    container_name: fillament-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - fillament
+
+  db:
+    image: postgres:15-alpine
+    container_name: fillament-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fillament
+      POSTGRES_USER: fillament
+      POSTGRES_PASSWORD: fillament
+    volumes:
+      - ./.docker/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - fillament
+
+  redis:
+    image: redis:alpine
+    container_name: fillament-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - fillament
+
+networks:
+  fillament:
+    driver: bridge 
