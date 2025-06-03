@@ -59,8 +59,8 @@
             "@php artisan config:clear --ansi",
             "@php artisan test"
         ],
-        "cs-check": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config=.php-cs-fixer.php --dry-run --diff",
-        "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config=.php-cs-fixer.php"
+        "cs-check": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config=.php-cs-fixer.php --dry-run --diff $(git ls-files -m *.php)",
+        "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config=.php-cs-fixer.php $(git ls-files -m *.php)"
     },
     "extra": {
         "laravel": {
