@@ -13,7 +13,7 @@ class CreditController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -21,7 +21,7 @@ class CreditController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -29,7 +29,7 @@ class CreditController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCreditRequest $request)
+    public function store(StoreCreditRequest $request): void
     {
         //
     }
@@ -37,7 +37,7 @@ class CreditController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Credit $credit)
+    public function show(Credit $credit): void
     {
         //
     }
@@ -45,7 +45,7 @@ class CreditController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Credit $credit)
+    public function edit(Credit $credit): void
     {
         //
     }
@@ -53,7 +53,7 @@ class CreditController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCreditRequest $request, Credit $credit)
+    public function update(UpdateCreditRequest $request, Credit $credit): void
     {
         //
     }
@@ -61,7 +61,7 @@ class CreditController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Credit $credit)
+    public function destroy(Credit $credit): void
     {
         //
     }

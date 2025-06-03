@@ -13,7 +13,7 @@ class SpecialtyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -21,7 +21,7 @@ class SpecialtyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -29,7 +29,7 @@ class SpecialtyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSpecialtyRequest $request)
+    public function store(StoreSpecialtyRequest $request): void
     {
         //
     }
@@ -37,7 +37,7 @@ class SpecialtyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Specialty $specialty)
+    public function show(Specialty $specialty): void
     {
         //
     }
@@ -45,7 +45,7 @@ class SpecialtyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Specialty $specialty)
+    public function edit(Specialty $specialty): void
     {
         //
     }
@@ -53,7 +53,7 @@ class SpecialtyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSpecialtyRequest $request, Specialty $specialty)
+    public function update(UpdateSpecialtyRequest $request, Specialty $specialty): void
     {
         //
     }
@@ -61,7 +61,7 @@ class SpecialtyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Specialty $specialty)
+    public function destroy(Specialty $specialty): void
     {
         //
     }
