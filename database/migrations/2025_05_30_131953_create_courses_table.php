@@ -12,16 +12,16 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table): void {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('code')->unique();
-            $table->integer('duration')->comment('Duration in hours');
-            $table->decimal('price', 10, 2);
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create('courses', function (Blueprint $blueprint): void {
+            $blueprint->id();
+            $blueprint->string('name');
+            $blueprint->text('description')->nullable();
+            $blueprint->string('code')->unique();
+            $blueprint->integer('duration')->comment('Duration in hours');
+            $blueprint->decimal('price', 10, 2);
+            $blueprint->boolean('is_active')->default(true);
+            $blueprint->timestamps();
+            $blueprint->softDeletes();
         });
     }
 

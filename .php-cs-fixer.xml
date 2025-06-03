@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="PHP CS Fixer">
+    <description>PHP CS Fixer configuration</description>
+
+    <!-- Paths to check -->
+    <file>app</file>
+    <file>config</file>
+    <file>database</file>
+    <file>routes</file>
+    <file>tests</file>
+
+    <!-- Exclude patterns -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/storage/*</exclude-pattern>
+    <exclude-pattern>*/bootstrap/cache/*</exclude-pattern>
+
+    <!-- Base rules -->
+    <rule name="@PSR12" value="true"/>
+    <rule name="strict_param" value="true"/>
+    <rule name="declare_strict_types" value="true"/>
+
+    <!-- Array rules -->
+    <rule name="array_syntax">
+        <properties>
+            <property name="syntax" value="short"/>
+        </properties>
+    </rule>
+    <rule name="array_indentation" value="true"/>
+    <rule name="array_push" value="true"/>
+    <rule name="trim_array_spaces" value="true"/>
+    <rule name="whitespace_after_comma_in_array" value="true"/>
+    <rule name="no_trailing_comma_in_singleline_array" value="true"/>
+    <rule name="trailing_comma_in_multiline">
+        <properties>
+            <property name="elements" type="array">
+                <element value="arrays"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Import and namespace rules -->
+    <rule name="no_unused_imports" value="true"/>
+    <rule name="ordered_imports">
+        <properties>
+            <property name="sort_algorithm" value="alpha"/>
+        </properties>
+    </rule>
+    <rule name="no_leading_import_slash" value="true"/>
+    <rule name="no_leading_namespace_whitespace" value="true"/>
+    <rule name="single_import_per_statement" value="true"/>
+    <rule name="single_line_after_imports" value="true"/>
+
+    <!-- Whitespace rules -->
+    <rule name="no_whitespace_in_blank_line" value="true"/>
+    <rule name="blank_lines_before_namespace" value="true"/>
+
+    <!-- PHPDoc rules -->
+    <rule name="phpdoc_align">
+        <properties>
+            <property name="align" value="left"/>
+        </properties>
+    </rule>
+    <rule name="phpdoc_scalar" value="true"/>
+    <rule name="phpdoc_to_param_type" value="true"/>
+    <rule name="phpdoc_to_return_type" value="true"/>
+    <rule name="phpdoc_var_without_name" value="true"/>
+    <rule name="phpdoc_no_empty_return" value="true"/>
+    <rule name="phpdoc_no_useless_inheritdoc" value="true"/>
+    <rule name="phpdoc_trim" value="true"/>
+    <rule name="phpdoc_trim_consecutive_blank_line_separation" value="true"/>
+    <rule name="phpdoc_types_order">
+        <properties>
+            <property name="null_adjustment" value="always_last"/>
+            <property name="sort_algorithm" value="none"/>
+        </properties>
+    </rule>
+    <rule name="phpdoc_array_type" value="true"/>
+
+    <!-- PHPUnit rules -->
+    <rule name="php_unit_strict" value="true"/>
+    <rule name="php_unit_test_case_static_method_calls">
+        <properties>
+            <property name="call_type" value="self"/>
+        </properties>
+    </rule>
+
+    <!-- Other rules -->
+    <rule name="single_quote" value="true"/>
+    <rule name="no_superfluous_phpdoc_tags" value="true"/>
+    <rule name="no_blank_lines_after_phpdoc" value="true"/>
+    <rule name="return_type_declaration">
+        <properties>
+            <property name="space_before" value="none"/>
+        </properties>
+    </rule>
+    <rule name="single_blank_line_at_eof" value="true"/>
+    <rule name="single_line_comment_style">
+        <properties>
+            <property name="comment_types" type="array">
+                <element value="hash"/>
+            </property>
+        </properties>
+    </rule>
+    <rule name="strict_comparison" value="true"/>
+    <rule name="types_spaces">
+        <properties>
+            <property name="space" value="none"/>
+        </properties>
+    </rule>
+</ruleset> 

@@ -29,7 +29,7 @@ class CreditController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCreditRequest $request): void
+    public function store(StoreCreditRequest $storeCreditRequest): void
     {
         //
     }
@@ -53,7 +53,7 @@ class CreditController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCreditRequest $request, Credit $credit): void
+    public function update(UpdateCreditRequest $updateCreditRequest, Credit $credit): void
     {
         //
     }

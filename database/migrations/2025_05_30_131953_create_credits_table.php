@@ -12,16 +12,16 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('credits', function (Blueprint $table): void {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('amount', 10, 2);
-            $table->integer('term')->comment('Term in months');
-            $table->decimal('interest_rate', 5, 2);
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create('credits', function (Blueprint $blueprint): void {
+            $blueprint->id();
+            $blueprint->string('name');
+            $blueprint->text('description')->nullable();
+            $blueprint->decimal('amount', 10, 2);
+            $blueprint->integer('term')->comment('Term in months');
+            $blueprint->decimal('interest_rate', 5, 2);
+            $blueprint->boolean('is_active')->default(true);
+            $blueprint->timestamps();
+            $blueprint->softDeletes();
         });
     }
 

@@ -29,7 +29,7 @@ class SpecialtyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSpecialtyRequest $request): void
+    public function store(StoreSpecialtyRequest $storeSpecialtyRequest): void
     {
         //
     }
@@ -53,7 +53,7 @@ class SpecialtyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSpecialtyRequest $request, Specialty $specialty): void
+    public function update(UpdateSpecialtyRequest $updateSpecialtyRequest, Specialty $specialty): void
     {
         //
     }

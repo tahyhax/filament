@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Models\User;
+
 return [
     'shield_resource' => [
         'should_register_navigation' => true,
@@ -19,7 +21,7 @@ return [
     'tenant_model' => null,
 
     'auth_provider_model' => [
-        'fqcn' => \App\Models\User::class,
+        'fqcn' => User::class,
     ],
 
     'super_admin' => [

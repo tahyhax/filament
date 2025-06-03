@@ -1,0 +1,37 @@
+{
+    "language_server_phpactor": {
+        "enabled": true
+    },
+    "language_server_completion": {
+        "enabled": true
+    },
+    "language_server_reference_finder": {
+        "enabled": true
+    },
+    "composer.autoloader_path": "vendor/autoload.php",
+    "indexer.exclude_patterns": [
+        "/vendor/**/Tests/**/*",
+        "/vendor/**/tests/**/*",
+        "/vendor/composer/**/*",
+        "/var/cache/**/*",
+        "/storage/**/*"
+    ],
+    "indexer.include_patterns": [
+        "/**/*.php"
+    ],
+    "symfony.enabled": true,
+    "code_transform.class_new.variants": {
+        "laravel-controller": {
+            "suffix": "Controller",
+            "template": "<?php\n\ndeclare(strict_types=1);\n\nnamespace {{ namespace }};\n\nuse App\\Http\\Controllers\\Controller;\n\nclass {{ class }} extends Controller\n{\n}\n"
+        },
+        "laravel-model": {
+            "suffix": "",
+            "template": "<?php\n\ndeclare(strict_types=1);\n\nnamespace {{ namespace }};\n\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass {{ class }} extends Model\n{\n}\n"
+        },
+        "laravel-request": {
+            "suffix": "Request",
+            "template": "<?php\n\ndeclare(strict_types=1);\n\nnamespace {{ namespace }};\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass {{ class }} extends FormRequest\n{\n    public function authorize(): bool\n    {\n        return true;\n    }\n\n    public function rules(): array\n    {\n        return [];\n    }\n}\n"
+        }
+    }
+} 

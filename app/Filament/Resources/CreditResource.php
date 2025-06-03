@@ -4,6 +4,20 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\Action;
+use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
+use App\Filament\Resources\CreditResource\Pages\ListCredits;
+use App\Filament\Resources\CreditResource\Pages\CreateCredit;
+use App\Filament\Resources\CreditResource\Pages\EditCredit;
 use App\Filament\Resources\CreditResource\Pages;
 use App\Filament\Resources\CreditResource\RelationManagers;
 use App\Models\Credit;
@@ -23,44 +37,44 @@ class CreditResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Grid::make()
+                Grid::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->required()
                             ->maxLength(255)
                             ->label('Credit Name'),
-                        Forms\Components\Checkbox::make('is_active')
+                        Checkbox::make('is_active')
                             ->default(true)
                             ->columnSpan(1)
                             ->label('Is Active'),
                     ])
                     ->columns()
                     ->columnSpanFull(),
-                Forms\Components\Grid::make()
+                Grid::make()
                     ->columns([
                         'sm' => 3,
                         'md' => 3,
                         'lg' => 3,
                     ])
                     ->schema([
-                        Forms\Components\TextInput::make('amount')
+                        TextInput::make('amount')
                             ->required()
                             ->numeric()
                             ->step(0.5)
                             ->label('amount'),
-                        Forms\Components\TextInput::make('interest_rate')
+                        TextInput::make('interest_rate')
                             ->required()
                             ->numeric()
                             ->step(0.5)
                             ->label('interest_rate'),
-                        Forms\Components\TextInput::make('term')
+                        TextInput::make('term')
                             ->required()
                             ->numeric()
                             ->step(1)
                             ->inputMode('integer')
                             ->label('Term (months)'),
                     ]),
-                Forms\Components\RichEditor::make('description')
+                RichEditor::make('description')
                     ->disableToolbarButtons(['attachFiles', 'link', 'blockquote', 'codeBlock', 'bulletList'])
                     ->label('Credit Description')
                     ->columnSpanFull(),
@@ -71,24 +85,24 @@ class CreditResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
+                TextColumn::make('id')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->limit(50),
-                Tables\Columns\IconColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->boolean()
                     ->sortable()
                     ->trueColor('success')
                     ->falseColor('danger'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -97,12 +111,12 @@ class CreditResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\Action::make('delete')
+                BulkActionGroup::make([
+                    Action::make('delete')
                         ->requiresConfirmation()
                         ->icon('heroicon-o-trash'),
                 ]),
@@ -112,16 +126,16 @@ class CreditResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\CoursesRelationManager::class,
+            CoursesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCredits::route('/'),
-            'create' => Pages\CreateCredit::route('/create'),
-            'edit' => Pages\EditCredit::route('/{record}/edit'),
+            'index' => ListCredits::route('/'),
+            'create' => CreateCredit::route('/create'),
+            'edit' => EditCredit::route('/{record}/edit'),
         ];
     }
 

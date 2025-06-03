@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use App\Filament\Resources\SpecialityResource\Pages\ListSpecialities;
+use App\Filament\Resources\SpecialityResource\Pages\CreateSpeciality;
+use App\Filament\Resources\SpecialityResource\Pages\ViewSpeciality;
+use App\Filament\Resources\SpecialityResource\Pages\EditSpeciality;
 use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
 use App\Filament\Resources\SpecialityResource\Pages;
 use App\Models\Specialty;
@@ -23,18 +36,18 @@ class SpecialtyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255)
                     ->label('Specialty Name'),
-                Forms\Components\TextInput::make('code')
+                TextInput::make('code')
                     ->required()
                     ->maxLength(5)
                     ->label('Code'),
-                Forms\Components\Checkbox::make('is_active')
+                Checkbox::make('is_active')
                     ->default(true)
                     ->label('Is Active'),
-                Forms\Components\RichEditor::make('description')
+                RichEditor::make('description')
                     ->disableToolbarButtons(['attachFiles', 'link', 'blockquote', 'codeBlock', 'bulletList'])
                     ->columnSpanFull()
                     ->label('Specialty Description'),
@@ -48,31 +61,31 @@ class SpecialtyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
+                TextColumn::make('id')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('code')
+                TextColumn::make('code')
                     ->sortable()
                     ->label('Code'),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->limit(50)
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->sortable()
                     ->boolean()
                     ->sortable()
                     ->trueColor('success')
                     ->falseColor('danger')
                     ->label('Active'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -81,12 +94,12 @@ class SpecialtyResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -101,10 +114,10 @@ class SpecialtyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSpecialities::route('/'),
-            'create' => Pages\CreateSpeciality::route('/create'),
-            'view' => Pages\ViewSpeciality::route('/{record}'),
-            'edit' => Pages\EditSpeciality::route('/{record}/edit'),
+            'index' => ListSpecialities::route('/'),
+            'create' => CreateSpeciality::route('/create'),
+            'view' => ViewSpeciality::route('/{record}'),
+            'edit' => EditSpeciality::route('/{record}/edit'),
         ];
     }
 

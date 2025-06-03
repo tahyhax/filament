@@ -12,11 +12,11 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('courseables', function (Blueprint $table): void {
-            $table->id();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->morphs('courseable');
-            $table->timestamps();
+        Schema::create('courseables', function (Blueprint $blueprint): void {
+            $blueprint->id();
+            $blueprint->foreignId('course_id')->constrained()->onDelete('cascade');
+            $blueprint->morphs('courseable');
+            $blueprint->timestamps();
         });
     }
 

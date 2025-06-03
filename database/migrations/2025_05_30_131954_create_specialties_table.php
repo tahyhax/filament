@@ -12,14 +12,14 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('specialties', function (Blueprint $table): void {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('code')->unique();
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create('specialties', function (Blueprint $blueprint): void {
+            $blueprint->id();
+            $blueprint->string('name');
+            $blueprint->text('description')->nullable();
+            $blueprint->string('code')->unique();
+            $blueprint->boolean('is_active')->default(true);
+            $blueprint->timestamps();
+            $blueprint->softDeletes();
         });
     }
 

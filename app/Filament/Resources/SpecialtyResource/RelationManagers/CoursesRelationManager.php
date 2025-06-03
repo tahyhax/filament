@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\SpecialtyResource\RelationManagers;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -18,7 +22,7 @@ class CoursesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -29,20 +33,20 @@ class CoursesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                TextColumn::make('name'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ])
             ->actions([
                 //                Tables\Actions\EditAction::make(),
                 //                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+                BulkActionGroup::make([
                     //                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

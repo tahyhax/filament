@@ -21,7 +21,7 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "phpunit/phpunit": "^11.5.3",
-        "rector/rector": "^1.0"
+        "rector/rector": "^1.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -74,7 +74,8 @@
             "@php vendor/bin/phpactor extension:install phpactor/completion-worse-extension",
             "@php vendor/bin/phpactor extension:install phpactor/reference-finder-extension",
             "@php vendor/bin/phpactor extension:install phpactor/symfony-extension"
-        ]
+        ],
+        "analyse": "phpstan analyse"
     },
     "extra": {
         "laravel": {
@@ -87,7 +88,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "phpactor/extension-manager-extension": true
         },
         "platform": {
             "php": "8.3.99"

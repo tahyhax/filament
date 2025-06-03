@@ -1,0 +1,43 @@
+# Magic behaviour with __get, __set, __call and __callStatic is not exactly static analyser-friendly :)
+# Fortunately, You can ingore it by the following config.
+#
+# vendor/bin/phpstan analyse app --memory-limit 200M -l 0
+#
+
+parameters:
+    level: 5
+    paths:
+        - app
+        - config
+        - database
+        - routes
+        - tests
+    excludePaths:
+        - vendor
+        - storage
+        - bootstrap/cache
+    rules:
+        - PHPStan\Rules\Arrays\DeadForeachRule
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    treatPhpDocTypesAsCertain: false
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: false
+    polluteScopeWithLoopInitialAssignments: false
+    polluteScopeWithAlwaysIterableForeach: false
+    checkAlwaysTrueCheckTypeFunctionCall: true
+    checkAlwaysTrueInstanceof: true
+    checkAlwaysTrueStrictComparison: true
+    checkExplicitMixedMissingReturn: true
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
+    reportMaybesInMethodSignatures: true
+    reportStaticMethodSignatures: true
+    reportMaybesInPropertyPhpDocTypes: true
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+        - '#Call to an undefined static method#'
+        - '#Access to an undefined property#'
+        - '#Call to an undefined method#'
+        - '#Method .* has no return type specified#'
+        - '#Property .* has no type specified#'

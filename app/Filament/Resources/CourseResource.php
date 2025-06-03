@@ -4,6 +4,21 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use App\Filament\Resources\CourseResource\Pages\ListCourses;
+use App\Filament\Resources\CourseResource\Pages\CreateCourse;
+use App\Filament\Resources\CourseResource\Pages\EditCourse;
 use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers;
 use App\Models\Course;
@@ -25,29 +40,29 @@ class CourseResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255)
                     ->label('Course Name'),
-                Forms\Components\Checkbox::make('is_active')
+                Checkbox::make('is_active')
                     ->default(true)
                     ->label('Is Active'),
 
-                Forms\Components\Grid::make()
+                Grid::make()
                     ->schema([
-                        Forms\Components\TextInput::make('code')
+                        TextInput::make('code')
                             ->required()
                             ->minLength(5)
                             ->maxLength(10)
                             ->unique(ignoreRecord: true)
                             ->label('Course Code'),
-                        Forms\Components\TextInput::make('duration')
+                        TextInput::make('duration')
                             ->required()
                             ->numeric()
                             ->step(1)
                             ->minValue(10)
                             ->label('Duration'),
-                        Forms\Components\TextInput::make('price')
+                        TextInput::make('price')
                             ->numeric()
                             ->inputMode('decimal')
                             ->default(0)
@@ -57,15 +72,15 @@ class CourseResource extends Resource
                     ])
                     ->columns(3)
                     ->columnSpanFull(),
-                Forms\Components\Section::make('Related Data')
+                Section::make('Related Data')
                     ->schema([
-                        Forms\Components\Select::make('credit_id')
+                        Select::make('credit_id')
                             ->required()
                             ->multiple()
                             ->relationship('credits', 'name')
                             ->preload()
                             ->label('Credits'),
-                        Forms\Components\Select::make('specialty_id')
+                        Select::make('specialty_id')
                             ->required()
                             ->multiple()
                             ->relationship('specialties', 'name')
@@ -75,7 +90,7 @@ class CourseResource extends Resource
                 ->columns([
                     'md' => 2,
                 ]),
-                Forms\Components\RichEditor::make('description')
+                RichEditor::make('description')
                     ->disableToolbarButtons(['attachFiles', 'link', 'blockquote', 'codeBlock', 'bulletList'])
                     ->columnSpanFull()
                     ->label('Course Description'),
@@ -89,49 +104,49 @@ class CourseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
+                TextColumn::make('id')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('code')
+                TextColumn::make('code')
                     ->sortable()
                     ->label('Code'),
-                Tables\Columns\TextColumn::make('credits_count')
+                TextColumn::make('credits_count')
                     ->badge()
                     ->counts('credits')
                     ->label('Credits'),
-                Tables\Columns\TextColumn::make('specialties_count')
+                TextColumn::make('specialties_count')
                     ->badge()
                     ->counts('specialties')
                     ->label('Specialties'),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->limit(50)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->filters([
-                Tables\Filters\SelectFilter::make('Credits')
+                SelectFilter::make('Credits')
                     ->relationship('credits', 'name')
                     ->label('Credits'),
-                Tables\Filters\SelectFilter::make('Specialties')
+                SelectFilter::make('Specialties')
                     ->relationship('specialties', 'name')
                     ->label('Specialties'),
             ])->headerActions([
                 //                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -154,9 +169,9 @@ class CourseResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCourses::route('/'),
-            'create' => Pages\CreateCourse::route('/create'),
-            'edit' => Pages\EditCourse::route('/{record}/edit'),
+            'index' => ListCourses::route('/'),
+            'create' => CreateCourse::route('/create'),
+            'edit' => EditCourse::route('/{record}/edit'),
         ];
     }
 
