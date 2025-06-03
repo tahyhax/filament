@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
@@ -94,11 +96,13 @@ class CourseResource extends Resource
                 Tables\Columns\TextColumn::make('code')
                     ->sortable()
                     ->label('Code'),
-                Tables\Columns\TextColumn::make('credits.name')
-                    ->sortable()
+                Tables\Columns\TextColumn::make('credits_count')
+                    ->badge()
+                    ->counts('credits')
                     ->label('Credits'),
-                Tables\Columns\TextColumn::make('specialties.name')
-                    ->sortable()
+                Tables\Columns\TextColumn::make('specialties_count')
+                    ->badge()
+                    ->counts('specialties')
                     ->label('Specialties'),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50)
@@ -119,7 +123,7 @@ class CourseResource extends Resource
                     ->relationship('specialties', 'name')
                     ->label('Specialties'),
             ])->headerActions([
-//                Tables\Actions\CreateAction::make(),
+                //                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -135,7 +139,7 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-//            RelationManagers\CreditsRelationManager::class
+            //            RelationManagers\CreditsRelationManager::class
         ];
     }
 
@@ -156,7 +160,7 @@ class CourseResource extends Resource
         ];
     }
 
-    public static function getNavigationBadge():?string
+    public static function getNavigationBadge(): ?string
     {
         return self::getModel()::count();
     }

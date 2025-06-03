@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CreditResource\Pages;
@@ -10,8 +12,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CreditResource extends Resource
 {
@@ -32,7 +32,7 @@ class CreditResource extends Resource
                         Forms\Components\Checkbox::make('is_active')
                             ->default(true)
                             ->columnSpan(1)
-                            ->label('Is Active')
+                            ->label('Is Active'),
                     ])
                     ->columns()
                     ->columnSpanFull(),
@@ -86,10 +86,12 @@ class CreditResource extends Resource
                     ->falseColor('danger'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -110,7 +112,7 @@ class CreditResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\CoursesRelationManager::class
+            RelationManagers\CoursesRelationManager::class,
         ];
     }
 
@@ -123,7 +125,7 @@ class CreditResource extends Resource
         ];
     }
 
-    public static function getNavigationBadge():?string
+    public static function getNavigationBadge(): ?string
     {
         return self::getModel()::count();
     }

@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
 use App\Filament\Resources\SpecialityResource\Pages;
-use App\Filament\Resources\SpecialityResource\RelationManagers;
 use App\Models\Specialty;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+
 class SpecialtyResource extends Resource
 {
     protected static ?string $model = Specialty::class;
@@ -52,13 +54,13 @@ class SpecialtyResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('code')
+                    ->sortable()
+                    ->label('Code'),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50)
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('code')
-                    ->sortable()
-                    ->label('Code'),
                 Tables\Columns\IconColumn::make('is_active')
                     ->sortable()
                     ->boolean()
@@ -68,10 +70,12 @@ class SpecialtyResource extends Resource
                     ->label('Active'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -90,7 +94,7 @@ class SpecialtyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CoursesRelationManager::class
+            CoursesRelationManager::class,
         ];
     }
 
@@ -104,8 +108,8 @@ class SpecialtyResource extends Resource
         ];
     }
 
-    public static function getNavigationBadge():?string
+    public static function getNavigationBadge(): ?string
     {
-       return self::getModel()::count();
+        return self::getModel()::count();
     }
 }
