@@ -63,13 +63,13 @@
                 state
                     ? '{{
                         match ($onColor) {
-                            'gray' => 'fi-color-gray bg-gray-200 dark:bg-gray-700',
+                            'gray' => 'fi-color-gray bg-gray-200',
                             default => 'fi-color-custom bg-custom-600',
                         }
                     }}'
                     : '{{
                         match ($offColor) {
-                            'gray' => 'fi-color-gray bg-gray-200 dark:bg-gray-700',
+                            'gray' => 'fi-color-gray bg-gray-200',
                             default => 'fi-color-custom bg-custom-600',
                         }
                     }}'
@@ -129,7 +129,7 @@
                             @class([
                                 'fi-fo-toggle-off-icon h-3 w-3',
                                 match ($offColor) {
-                                    'gray' => 'text-gray-400 dark:text-gray-700',
+                                    'gray' => 'text-gray-400',
                                     default => 'text-custom-600',
                                 },
                             ])
@@ -152,7 +152,7 @@
                             @class([
                                 'fi-fo-toggle-on-icon h-3 w-3',
                                 match ($onColor) {
-                                    'gray' => 'text-gray-400 dark:text-gray-700',
+                                    'gray' => 'text-gray-400',
                                     default => 'text-custom-600',
                                 },
                             ])
