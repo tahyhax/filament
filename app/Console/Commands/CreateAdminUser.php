@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
 class CreateAdminUser extends Command
 {
     protected $signature = 'admin:create {email?} {name?} {password?}';
+
     protected $description = 'Create a new admin user';
 
     public function handle(): int
@@ -36,9 +38,9 @@ class CreateAdminUser extends Command
             );
 
             return self::SUCCESS;
-        } catch (\Exception $e) {
-            $this->error('Error creating admin user: ' . $e->getMessage());
+        } catch (Exception $exception) {
+            $this->error('Error creating admin user: ' . $exception->getMessage());
             return self::FAILURE;
         }
     }
-} 
+}

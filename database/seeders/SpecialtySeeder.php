@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Specialty;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class SpecialtySeeder extends Seeder
@@ -15,38 +14,71 @@ class SpecialtySeeder extends Seeder
      */
     public function run(): void
     {
-        $generator = Factory::create();
-
         $specialties = [
-            ['name' => 'Software Development', 'code' => 'SD001'],
-            ['name' => 'Web Development', 'code' => 'WD001'],
-            ['name' => 'Mobile Development', 'code' => 'MD001'],
-            ['name' => 'Artificial Intelligence', 'code' => 'AI001'],
-            ['name' => 'Cybersecurity', 'code' => 'CS001'],
-            ['name' => 'Data Analysis', 'code' => 'DA001'],
-            ['name' => 'Cloud Computing', 'code' => 'CC001'],
-            ['name' => 'DevOps Engineering', 'code' => 'DE001'],
-            ['name' => 'UX/UI Design', 'code' => 'UD001'],
-            ['name' => 'Software Testing', 'code' => 'ST001'],
-            ['name' => 'Blockchain Development', 'code' => 'BD001'],
-            ['name' => 'System Administration', 'code' => 'SA001'],
-            ['name' => 'Computer Graphics', 'code' => 'CG001'],
-            ['name' => 'Embedded Systems', 'code' => 'ES001'],
-            ['name' => 'Project Management', 'code' => 'PM001'],
-            ['name' => 'Business Analysis', 'code' => 'BA001'],
-            ['name' => 'Machine Learning', 'code' => 'ML001'],
-            ['name' => 'Game Development', 'code' => 'GD001'],
-            ['name' => 'Network Engineering', 'code' => 'NE001'],
-            ['name' => 'Technical Writing', 'code' => 'TW001'],
+            [
+                'name' => 'Computer Science',
+                'code' => 'CS001',
+                'description' => 'Study of computation, automation, and information',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Data Science',
+                'code' => 'DS001',
+                'description' => 'Analysis of data and machine learning',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Software Engineering',
+                'code' => 'SE001',
+                'description' => 'Software development and engineering principles',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Artificial Intelligence',
+                'code' => 'AI001',
+                'description' => 'Study of intelligent systems and algorithms',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Cybersecurity',
+                'code' => 'CS002',
+                'description' => 'Information security and cyber defense',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Web Development',
+                'code' => 'WD001',
+                'description' => 'Web applications and technologies',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Mobile Development',
+                'code' => 'MD001',
+                'description' => 'Mobile app development for various platforms',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Cloud Computing',
+                'code' => 'CC001',
+                'description' => 'Cloud infrastructure and services',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Network Engineering',
+                'code' => 'NE001',
+                'description' => 'Computer networks and telecommunications',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'DevOps Engineering',
+                'code' => 'DO001',
+                'description' => 'Development operations and automation',
+                'is_active' => true,
+            ],
         ];
 
         foreach ($specialties as $specialty) {
-            Specialty::create([
-                'name' => $specialty['name'],
-                'code' => $specialty['code'],
-                'description' => $generator->paragraph(),
-                'is_active' => $generator->boolean(80),
-            ]);
+            Specialty::create($specialty);
         }
     }
 }

@@ -4,26 +4,23 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
+use App\Filament\Resources\SpecialityResource\Pages\CreateSpeciality;
+use App\Filament\Resources\SpecialityResource\Pages\EditSpeciality;
+use App\Filament\Resources\SpecialityResource\Pages\ListSpecialities;
+use App\Filament\Resources\SpecialityResource\Pages\ViewSpeciality;
+use App\Models\Specialty;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteBulkAction;
-use App\Filament\Resources\SpecialityResource\Pages\ListSpecialities;
-use App\Filament\Resources\SpecialityResource\Pages\CreateSpeciality;
-use App\Filament\Resources\SpecialityResource\Pages\ViewSpeciality;
-use App\Filament\Resources\SpecialityResource\Pages\EditSpeciality;
-use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
-use App\Filament\Resources\SpecialityResource\Pages;
-use App\Models\Specialty;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class SpecialtyResource extends Resource

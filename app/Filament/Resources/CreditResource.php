@@ -4,27 +4,23 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\Action;
-use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
-use App\Filament\Resources\CreditResource\Pages\ListCredits;
 use App\Filament\Resources\CreditResource\Pages\CreateCredit;
 use App\Filament\Resources\CreditResource\Pages\EditCredit;
-use App\Filament\Resources\CreditResource\Pages;
-use App\Filament\Resources\CreditResource\RelationManagers;
+use App\Filament\Resources\CreditResource\Pages\ListCredits;
+use App\Filament\Resources\CreditResource\RelationManagers\CoursesRelationManager;
 use App\Models\Credit;
-use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class CreditResource extends Resource

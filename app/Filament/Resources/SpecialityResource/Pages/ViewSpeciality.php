@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\SpecialityResource\Pages;
 
-use Filament\Actions\EditAction;
 use App\Filament\Resources\SpecialtyResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewSpeciality extends ViewRecord

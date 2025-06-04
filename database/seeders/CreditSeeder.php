@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Credit;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class CreditSeeder extends Seeder
@@ -15,30 +14,91 @@ class CreditSeeder extends Seeder
      */
     public function run(): void
     {
-        $generator = Factory::create();
-
-        $creditTypes = [
-            'Basic Education Loan',
-            'Standard Education Loan',
-            'Premium Education Loan',
-            'Student Loan',
-            'MBA Loan',
-            'Professional Development Loan',
-            'Short-term Education Loan',
-            'IT Education Loan',
-            'Family Education Loan',
-            'Language Course Loan',
+        $credits = [
+            [
+                'name' => 'Academic Writing',
+                'description' => 'Develop academic writing skills',
+                'amount' => 5000,
+                'term' => 12,
+                'interest_rate' => 5.5,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Research Methods',
+                'description' => 'Learn research methodologies',
+                'amount' => 7500,
+                'term' => 24,
+                'interest_rate' => 6.0,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Critical Thinking',
+                'description' => 'Enhance analytical and critical thinking',
+                'amount' => 6000,
+                'term' => 18,
+                'interest_rate' => 5.8,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Digital Literacy',
+                'description' => 'Master digital tools and technologies',
+                'amount' => 4500,
+                'term' => 12,
+                'interest_rate' => 5.2,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Professional Ethics',
+                'description' => 'Understanding professional conduct and ethics',
+                'amount' => 5500,
+                'term' => 15,
+                'interest_rate' => 5.7,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Communication Skills',
+                'description' => 'Improve verbal and written communication',
+                'amount' => 4800,
+                'term' => 12,
+                'interest_rate' => 5.3,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Project Management',
+                'description' => 'Learn project planning and execution',
+                'amount' => 8000,
+                'term' => 24,
+                'interest_rate' => 6.2,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Leadership',
+                'description' => 'Develop leadership capabilities',
+                'amount' => 7000,
+                'term' => 18,
+                'interest_rate' => 5.9,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Innovation',
+                'description' => 'Foster creative thinking and innovation',
+                'amount' => 6500,
+                'term' => 15,
+                'interest_rate' => 5.6,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Global Perspective',
+                'description' => 'Understanding international contexts',
+                'amount' => 7200,
+                'term' => 18,
+                'interest_rate' => 5.8,
+                'is_active' => true,
+            ],
         ];
 
-        foreach ($creditTypes as $creditType) {
-            Credit::create([
-                'name' => $creditType,
-                'description' => $generator->paragraph(),
-                'amount' => $generator->numberBetween(5000, 100000),
-                'term' => $generator->randomElement([6, 12, 24, 36, 48]),
-                'interest_rate' => $generator->randomFloat(2, 4, 12),
-                'is_active' => $generator->boolean(80),
-            ]);
+        foreach ($credits as $credit) {
+            Credit::create($credit);
         }
     }
 }

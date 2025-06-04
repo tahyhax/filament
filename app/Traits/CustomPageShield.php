@@ -42,8 +42,10 @@ trait CustomPageShield
 
     protected static function checkAnyPermissions(): bool
     {
-        return Filament::auth()->user()->can(static::getPagePermissionIdentifier())
-            || Filament::auth()->user()->hasAnyPermission(static::getPagePermissionIdentifier());
+        if (Filament::auth()->user()->can(static::getPagePermissionIdentifier())) {
+            return true;
+        }
+        return (bool) Filament::auth()->user()->hasAnyPermission(static::getPagePermissionIdentifier());
     }
 
     public static function getPagePermissionIdentifier(): string
@@ -63,4 +65,4 @@ trait CustomPageShield
     {
         return static::canAccess() && parent::shouldRegisterNavigation();
     }
-} 
+}

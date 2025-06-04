@@ -17,8 +17,8 @@ class FilamentShieldServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Filament::serving(function () {
+        Filament::serving(function (): void {
             Filament::registerPlugin(FilamentShieldPlugin::make());
         });
     }
-} 
+}
