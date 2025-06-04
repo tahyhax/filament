@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   app:
@@ -7,36 +7,45 @@ services:
       dockerfile: Dockerfile
     container_name: fillament-app
     restart: unless-stopped
-    working_dir: /var/www/
+    working_dir: /var/www
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
-      - ./:/var/www
+      - .:/var/www
     networks:
       - fillament
+    depends_on:
+      - db
+      - redis
 
   nginx:
     image: nginx:alpine
     container_name: fillament-nginx
     restart: unless-stopped
     ports:
-      - "8000:80"
+      - "8080:80"
     volumes:
-      - ./:/var/www
-      - ./.docker/nginx/conf.d:/etc/nginx/conf.d/
+      - .:/var/www
+      - .docker/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - fillament
+    depends_on:
+      - app
 
   db:
     image: postgres:15-alpine
     container_name: fillament-db
     restart: unless-stopped
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: fillament
       POSTGRES_USER: fillament
       POSTGRES_PASSWORD: fillament
     volumes:
-      - ./.docker/postgresql/data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      - .docker/postgresql/data:/var/lib/postgresql/data
     networks:
       - fillament
 
