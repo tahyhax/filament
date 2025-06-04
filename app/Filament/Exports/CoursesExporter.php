@@ -16,19 +16,30 @@ class CoursesExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('name'),
-            ExportColumn::make('code'),
-            ExportColumn::make('duration'),
-            ExportColumn::make('is_active'),
-            ExportColumn::make('description'),
-            ExportColumn::make('credits')
-                ->label('Credit Name')
+            ExportColumn::make('id')
+                ->label('ID'),
+            ExportColumn::make('name')
+                ->label('Course Name'),
+            ExportColumn::make('code')
+                ->label('Course Code'),
+            ExportColumn::make('duration')
+                ->label('Duration (hours)'),
+            ExportColumn::make('price')
+                ->label('Price'),
+            ExportColumn::make('is_active')
+                ->label('Active Status'),
+            ExportColumn::make('description')
+                ->label('Description'),
+            ExportColumn::make('credits.name')
+                ->label('Credits')
                 ->listAsJson(),
-            ExportColumn::make('specialities.name')
-                ->label('Speciality Name')
+            ExportColumn::make('specialties.name')
+                ->label('Specialties')
                 ->listAsJson(),
-            ExportColumn::make('created_at'),
-            ExportColumn::make('updated_at'),
+            ExportColumn::make('created_at')
+                ->label('Created At'),
+            ExportColumn::make('updated_at')
+                ->label('Updated At'),
         ];
     }
 
