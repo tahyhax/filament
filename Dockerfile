@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpq-dev \
     libicu-dev \
-    libzip-dev
+    libzip-dev \
+    supervisor
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -38,5 +39,17 @@ COPY . /var/www
 # Install project dependencies
 RUN composer install
 
+# Copy supervisor configuration
+COPY .docker/supervisor/queue.conf /etc/supervisor/conf.d/
+
 # Change ownership of our applications
-RUN chown -R www-data:www-data /var/www 
+RUN chown -R www-data:www-data /var/www
+
+# Create the log directory for supervisor
+RUN mkdir -p /var/log/supervisor
+
+# Create a startup script
+COPY .docker/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+CMD ["/usr/local/bin/start.sh"] 
