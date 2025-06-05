@@ -88,15 +88,6 @@ make queue-work  # Start queue worker
 - Notification System
 - Data Export
 
-## Project Structure
-
-- `app/Filament/Resources/` - Filament Resources (CRUD)
-- `app/Models/` - Application Models
-- `database/migrations/` - Database Migrations
-- `database/seeders/` - Database Seeders
-- `routes/` - Application Routes
-- `.docker/` - Docker Configuration
-
 ## Security
 
 - All API requests require authentication
@@ -120,7 +111,3 @@ The project is configured with Xdebug for PHP. Configuration can be found in `.d
 ### Queue Processing
 
 The project uses Supervisor to manage Laravel queues. Configuration is located in `.docker/supervisor/queue.conf`.
-
-## Support
-
-If you encounter any issues, please create an issue in the project repository.
