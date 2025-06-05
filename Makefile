@@ -15,25 +15,36 @@ help: ## Show this help message
 	@printf "Available targets:\n"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[33m%-15s\033[0m %s\n", $$1, $$2}'
 
-# Initial setup
-setup: ## Initial project setup
-	cp .env.example .env
-	docker-compose up -d --build
-	make install
-	make init-shield
-	make build
+rebuild: ## Full rebuild of Docker containers (stops, removes containers and images, then builds again)
+	@echo "$(COLOR_YELLOW)Stopping all containers...$(COLOR_RESET)"
+	docker-compose down
+	@echo "$(COLOR_YELLOW)Removing all containers and images related to this project...$(COLOR_RESET)"
+	docker-compose down --rmi all --volumes --remove-orphans
+	@echo "$(COLOR_GREEN)Remove db folders ...$(COLOR_RESET)"
+	rm -rf ./conf/postgres/data
+	rm -rf ./conf/redis/data
+	@echo "$(COLOR_GREEN)Remove app folders...$(COLOR_RESET)"
+	rm -rf ../vendor
+	rm -rf ../coverage
+	rm -rf ../node_modules
+	@echo "$(COLOR_GREEN)Building and starting containers from scratch...$(COLOR_RESET)"
+	make build-construct
+	@echo "$(COLOR_GREEN)Rebuild completed successfully!$(COLOR_RESET)"
 
-# Installation commands
-install: ## Install all dependencies
+build-setup: ## Build setup
+	@if [ ! -f .env ]; then \
+		echo "$(COLOR_GREEN)Creating .env file from .env.example...$(COLOR_RESET)"; \
+		cp .env.example .env; \
+	else \
+		echo "$(COLOR_YELLOW).env file already exists, skipping...$(COLOR_RESET)"; \
+	fi
+
+build-construct: ## Initial project setup and build
+	docker-compose up -d --build
 	docker-compose exec app composer install
-	docker-compose exec app npm install
 	docker-compose exec app php artisan key:generate
 	docker-compose exec app php artisan migrate
-	docker-compose exec app php artisan db:seed
-
-# Build commands
-build: ## Build frontend assets
-	docker-compose exec app npm run build
+	docker-compose exec app php artisan shield:install
 
 # Docker commands
 start: ## Start Docker containers
@@ -47,49 +58,20 @@ restart: ## Restart Docker containers
 	docker-compose up -d
 
 # Shield initialization
-init-shield: ## Initialize FilamentShield
-	docker-compose exec app php artisan shield:install
+init-shield-user: ## Initialize FilamentShield
 	docker-compose exec app php artisan shield:super-admin
-	docker-compose exec app php artisan shield:generate --all
-
-# Development commands
-dev: ## Start development environment
-	docker-compose exec app php artisan queue:work & \
-	docker-compose exec app npm run dev
-
-# Testing commands
-test: ## Run tests
-	docker-compose exec app composer test
 
 # Linting and formatting
 lint: ## Run linting and code formatting
 	docker-compose exec app composer cs-fix
 	docker-compose exec app composer refactor
 
-# Shield management
-shield-role: ## Create new Shield role (usage: make shield-role ROLE=roleName)
-	docker-compose exec app php artisan shield:role $(ROLE)
-
-shield-generate: ## Generate Shield permissions
-	docker-compose exec app php artisan shield:generate --all
-
-# Queue management
-queue-work: ## Start queue worker
-	docker-compose exec app php artisan queue:work
-
-# Database commands
-migrate: ## Run database migrations
-	docker-compose exec app php artisan migrate
-
 seed: ## Run database seeders
 	docker-compose exec app php artisan db:seed
 
-migrate-fresh: ## Reset and re-run all migrations
-	docker-compose exec app php artisan migrate:fresh --seed
-
 # Logs
-logs: ## View application logs
+app-logs: ## View application logs
 	docker-compose logs -f app
 
 # Default target
-.DEFAULT_GOAL := help 
+.DEFAULT_GOAL := help

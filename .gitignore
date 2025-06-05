@@ -19,7 +19,7 @@
 /storage/*.key
 /storage/pail
 /vendor
-/.docker/postgresql/data/*
+/.docker/postgres/data/*
 /lang/vendor/*
 Homestead.json
 Homestead.yaml

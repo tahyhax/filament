@@ -36,7 +36,6 @@ This command will:
 - Build and start Docker containers
 - Install all dependencies
 - Initialize FilamentShield
-- Build frontend assets
 
 ## Available Commands
 
@@ -57,27 +56,17 @@ make test     # Run tests
 
 ### Database Operations
 ```bash
-make migrate       # Run migrations
 make seed         # Run seeders
-make migrate-fresh # Reset and re-run all migrations with seeds
 ```
 
 ### FilamentShield Management
 ```bash
-make init-shield     # Initialize FilamentShield
-make shield-role ROLE=roleName  # Create new role
-make shield-generate # Generate permissions for new resources
-```
-
-### Queue Management
-```bash
-make queue-work  # Start queue worker
+make init-shield-user  # Initialize FilamentShield user
 ```
 
 ## Application Access
 
 - Admin Panel: http://localhost:8080/admin
-- API: http://localhost:8080/api
 
 ## Core Features
 
@@ -90,7 +79,6 @@ make queue-work  # Start queue worker
 
 ## Security
 
-- All API requests require authentication
 - Role and permission system implemented through FilamentShield
 - CSRF protection enabled
 - Resource and action level access control
