@@ -35,18 +35,14 @@ class CoursesRelationManager extends RelationManager
                 TextColumn::make('name'),
             ])
             ->filters([
-                //
             ])
             ->headerActions([
                 CreateAction::make(),
             ])
             ->actions([
-                //                Tables\Actions\EditAction::make(),
-                //                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    //                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
