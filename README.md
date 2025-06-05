@@ -29,15 +29,26 @@ cd fillament
 
 2. Run initial setup:
 ```bash
-make setup
+make build-setup
 ```
 This command will:
 - Copy environment file
+
+3. Run build construct:
+```bash
+make build-construct
+```
+This command will:
 - Build and start Docker containers
 - Install all dependencies
 - Initialize FilamentShield
 
 ## Available Commands
+
+### Rebuild from Scratch
+```bash
+make rebuild # Rebuild the project from scratch
+```
 
 ### Docker Management
 ```bash
