@@ -60,9 +60,7 @@ make logs     # View application logs
 
 ### Development
 ```bash
-make dev      # Start development environment (queue worker + vite)
 make lint     # Run code linting and formatting
-make test     # Run tests
 ```
 
 ### Database Operations
