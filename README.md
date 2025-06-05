@@ -19,69 +19,62 @@ Administrative panel based on Laravel Filament with course, credit, and specialt
 - PHP-FPM 8.3
 - Supervisor for queues
 
-## Installation and Setup
+## Quick Start
 
-### 1. Clone Repository
-
+1. Clone repository:
 ```bash
 git clone <repository-url>
 cd fillament
 ```
 
-### 2. Environment Setup
-
-1. Copy environment file:
+2. Run initial setup:
 ```bash
-cp .env.example .env
+make setup
+```
+This command will:
+- Copy environment file
+- Build and start Docker containers
+- Install all dependencies
+- Initialize FilamentShield
+- Build frontend assets
+
+## Available Commands
+
+### Docker Management
+```bash
+make start    # Start Docker containers
+make stop     # Stop Docker containers
+make restart  # Restart Docker containers
+make logs     # View application logs
 ```
 
-2. Configure environment variables in `.env`:
-
-### 3. Docker Setup
-
-1. Build and start containers:
+### Development
 ```bash
-docker-compose up -d --build
+make dev      # Start development environment (queue worker + vite)
+make lint     # Run code linting and formatting
+make test     # Run tests
 ```
 
-2. Install dependencies:
+### Database Operations
 ```bash
-docker-compose exec app composer install
-docker-compose exec app npm install
+make migrate       # Run migrations
+make seed         # Run seeders
+make migrate-fresh # Reset and re-run all migrations with seeds
 ```
 
-3. Generate application key:
+### FilamentShield Management
 ```bash
-docker-compose exec app php artisan key:generate
+make init-shield     # Initialize FilamentShield
+make shield-role ROLE=roleName  # Create new role
+make shield-generate # Generate permissions for new resources
 ```
 
-4. Run migrations and seeders:
+### Queue Management
 ```bash
-# Run migrations
-docker-compose exec app php artisan migrate
-
-# Run seeders
-docker-compose exec app php artisan db:seed
+make queue-work  # Start queue worker
 ```
 
-5. Initialize FilamentShield:
-```bash
-# Create roles and permissions
-docker-compose exec app php artisan shield:install
-
-# Create super-admin
-docker-compose exec app php artisan shield:super-admin
-
-# Generate policies and permissions for resources
-docker-compose exec app php artisan shield:generate --all
-```
-
-6. Compile frontend assets:
-```bash
-docker-compose exec app npm run build
-```
-
-### 4. Application Access
+## Application Access
 
 - Admin Panel: http://localhost:8080/admin
 - API: http://localhost:8080/api
@@ -95,60 +88,14 @@ docker-compose exec app npm run build
 - Notification System
 - Data Export
 
-## Development
+## Project Structure
 
-### Development Mode
-
-```bash
-# Start queue worker
-docker-compose exec app php artisan queue:work
-
-# Start development server
-docker-compose exec app npm run dev
-```
-
-### Access Management
-
-FilamentShield provides a role and permission management system:
-
-1. Create new role:
-```bash
-docker-compose exec app php artisan shield:role roleName
-```
-
-2. Update permissions when adding new resources:
-```bash
-docker-compose exec app php artisan shield:generate --all
-```
-
-3. Manage permissions via interface:
-- Navigate to "Shield" section in admin panel
-- Configure roles and permissions for each resource
-- Assign roles to users in "Users" section
-
-### Debugging
-
-The project is configured with Xdebug for PHP. Configuration can be found in `.docker/php/xdebug.ini`.
-
-### Code Linting and Formatting
-
-```bash
-# PHP CS Fixer
-docker-compose exec app composer cs-fix
-
-# Rector (refactoring)
-docker-compose exec app composer refactor
-```
-
-## Testing
-
-```bash
-docker-compose exec app composer test
-```
-
-## Queues and Tasks
-
-The project uses Supervisor to manage Laravel queues. Configuration is located in `.docker/supervisor/queue.conf`.
+- `app/Filament/Resources/` - Filament Resources (CRUD)
+- `app/Models/` - Application Models
+- `database/migrations/` - Database Migrations
+- `database/seeders/` - Database Seeders
+- `routes/` - Application Routes
+- `.docker/` - Docker Configuration
 
 ## Security
 
@@ -156,3 +103,24 @@ The project uses Supervisor to manage Laravel queues. Configuration is located i
 - Role and permission system implemented through FilamentShield
 - CSRF protection enabled
 - Resource and action level access control
+
+## Development Guide
+
+### Environment Setup
+
+The project includes a comprehensive Makefile for common tasks. View all available commands:
+```bash
+make help
+```
+
+### Debugging
+
+The project is configured with Xdebug for PHP. Configuration can be found in `.docker/php/xdebug.ini`.
+
+### Queue Processing
+
+The project uses Supervisor to manage Laravel queues. Configuration is located in `.docker/supervisor/queue.conf`.
+
+## Support
+
+If you encounter any issues, please create an issue in the project repository.
